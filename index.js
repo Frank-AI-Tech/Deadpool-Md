@@ -73,10 +73,17 @@ loadDatabase()
 async function connectToWhatsApp() {
 const { state, saveCreds } = await useMultiFileAuthState(global.sessionName)
 const haikal = makeWASocket({
-logger: pino({ level: 'silent' }),
-printQRInTerminal: true,
-browser: ['Zetsubo V1','Safari','1.0.0'],
-auth: state})
+logger: pino({ level: "silent" }),
+printQRInTerminal: !usePairingCode,
+auth: state,
+browser: ["Ubuntu", "Chrome", "20.0.04"]
+});
+if(usePairingCode && !haikal.authState.creds.registered) {
+		const phoneNumber = await question('Motherfucker😂 put your number starting with Country Code 254:\n');
+		const code = await haikal.requestPairingCode(phoneNumber.trim())
+		console.log(`Pairing code: ${code}`)
+
+	}
 //=================================================//
 haikal.decodeJid = (jid) => {
 if (!jid) return jid
