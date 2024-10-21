@@ -72,7 +72,7 @@ loadDatabase()
 //=================================================//
 async function connectToWhatsApp() {
 const { state, saveCreds } = await useMultiFileAuthState(global.sessionName)
-const classic = makeWASocket({
+const haikal = makeWASocket({
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
 browser: ['Zetsubo V1','Safari','1.0.0'],
